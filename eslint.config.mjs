@@ -3,7 +3,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['dist/**'],
+    ignores: ['dist/**']
   },
   js.configs.recommended,
   {
@@ -11,15 +11,15 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
-      globals: globals.node,
-    },
+      globals: globals.node
+    }
   },
   {
-    files: ['test/**/*.js'],
+    files: ['test/**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.node,
-    },
-  },
+      globals: globals.node
+    }
+  }
 ];

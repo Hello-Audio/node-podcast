@@ -30,11 +30,13 @@ class Podcast {
     this.feedOptions.custom_elements = options.customElements || [];
     this.feedOptions.custom_namespaces = {
       itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
-      ...options.customNamespaces,
+      ...options.customNamespaces
     };
 
     if (options.itunesAuthor || options.author) {
-      this.feedOptions.custom_elements.push({ 'itunes:author': options.itunesAuthor || options.author });
+      this.feedOptions.custom_elements.push({
+        'itunes:author': options.itunesAuthor || options.author
+      });
     }
 
     if (options.itunesSubtitle) {
@@ -42,7 +44,9 @@ class Podcast {
     }
 
     if (options.itunesSummary || options.description) {
-      this.feedOptions.custom_elements.push({ 'itunes:summary': options.itunesSummary || options.description });
+      this.feedOptions.custom_elements.push({
+        'itunes:summary': options.itunesSummary || options.description
+      });
     }
 
     if (options.itunesType) {
@@ -53,11 +57,13 @@ class Podcast {
     this.feedOptions.custom_elements.push({
       'itunes:owner': [
         { 'itunes:name': this.feedOptions.itunesOwner.name },
-        { 'itunes:email': this.feedOptions.itunesOwner.email },
-      ],
+        { 'itunes:email': this.feedOptions.itunesOwner.email }
+      ]
     });
 
-    this.feedOptions.custom_elements.push({ 'itunes:explicit': (options.itunesExplicit || false) ? 'Yes' : 'No' });
+    this.feedOptions.custom_elements.push({
+      'itunes:explicit': options.itunesExplicit || false ? 'Yes' : 'No'
+    });
 
     if (options.itunesCategory) {
       // [{text:String, subcats:[{text:String, subcats:Array}]}]
@@ -71,9 +77,9 @@ class Podcast {
       this.feedOptions.custom_elements.push({
         'itunes:image': {
           _attr: {
-            href: options.itunesImage || options.image_url || options.imageUrl,
-          },
-        },
+            href: options.itunesImage || options.image_url || options.imageUrl
+          }
+        }
       });
     }
 
@@ -94,22 +100,32 @@ class Podcast {
       lat: itemOptions.lat,
       long: itemOptions.long,
       enclosure: itemOptions.enclosure || false,
-      custom_elements: itemOptions.customElements || [],
+      custom_elements: itemOptions.customElements || []
     };
 
     if (itemOptions.content) {
       item.custom_elements.push({
         'content:encoded': {
-          _cdata: itemOptions.content,
-        },
+          _cdata: itemOptions.content
+        }
       });
     }
 
-    if (itemOptions.itunesAuthor || itemOptions.author) item.custom_elements.push({ 'itunes:author': itemOptions.itunesAuthor || itemOptions.author });
-    if (itemOptions.itunesSubtitle) item.custom_elements.push({ 'itunes:subtitle': itemOptions.itunesSubtitle });
-    if (itemOptions.itunesSummary || itemOptions.description) item.custom_elements.push({ 'itunes:summary': itemOptions.itunesSummary || itemOptions.description });
-    item.custom_elements.push({ 'itunes:explicit': (itemOptions.itunesExplicit || false) ? 'Yes' : 'No' });
-    if (itemOptions.itunesDuration) item.custom_elements.push({ 'itunes:duration': durationFormat(itemOptions.itunesDuration) });
+    if (itemOptions.itunesAuthor || itemOptions.author)
+      item.custom_elements.push({
+        'itunes:author': itemOptions.itunesAuthor || itemOptions.author
+      });
+    if (itemOptions.itunesSubtitle)
+      item.custom_elements.push({ 'itunes:subtitle': itemOptions.itunesSubtitle });
+    if (itemOptions.itunesSummary || itemOptions.description)
+      item.custom_elements.push({
+        'itunes:summary': itemOptions.itunesSummary || itemOptions.description
+      });
+    item.custom_elements.push({
+      'itunes:explicit': itemOptions.itunesExplicit || false ? 'Yes' : 'No'
+    });
+    if (itemOptions.itunesDuration)
+      item.custom_elements.push({ 'itunes:duration': durationFormat(itemOptions.itunesDuration) });
     if (itemOptions.itunesKeywords) {
       deprecate({ name: 'itunesKeywords', type: 'option' });
       item.custom_elements.push({ 'itunes:keywords': itemOptions.itunesKeywords });
@@ -118,17 +134,21 @@ class Podcast {
       item.custom_elements.push({
         'itunes:image': {
           _attr: {
-            href: itemOptions.itunesImage || itemOptions.image_url || itemOptions.imageUrl,
-          },
-        },
+            href: itemOptions.itunesImage || itemOptions.image_url || itemOptions.imageUrl
+          }
+        }
       });
     }
-    if (itemOptions.itunesSeason) item.custom_elements.push({ 'itunes:season': itemOptions.itunesSeason });
-    if (itemOptions.itunesEpisode) item.custom_elements.push({ 'itunes:episode': itemOptions.itunesEpisode });
-    if (itemOptions.itunesTitle) item.custom_elements.push({ 'itunes:title': itemOptions.itunesTitle });
-    if (itemOptions.itunesEpisodeType) item.custom_elements.push({ 'itunes:episodeType': itemOptions.itunesEpisodeType });
-    if (itemOptions.itunesNewFeedUrl) item.custom_elements.push({ 'itunes:new-feed-url': itemOptions.itunesNewFeedUrl });
-
+    if (itemOptions.itunesSeason)
+      item.custom_elements.push({ 'itunes:season': itemOptions.itunesSeason });
+    if (itemOptions.itunesEpisode)
+      item.custom_elements.push({ 'itunes:episode': itemOptions.itunesEpisode });
+    if (itemOptions.itunesTitle)
+      item.custom_elements.push({ 'itunes:title': itemOptions.itunesTitle });
+    if (itemOptions.itunesEpisodeType)
+      item.custom_elements.push({ 'itunes:episodeType': itemOptions.itunesEpisodeType });
+    if (itemOptions.itunesNewFeedUrl)
+      item.custom_elements.push({ 'itunes:new-feed-url': itemOptions.itunesNewFeedUrl });
 
     this.items.push(item);
     return this;
@@ -141,27 +161,27 @@ class Podcast {
   }
 
   /**
- * @deprecated Since version 1.0.0
- */
+   * @deprecated Since version 1.0.0
+   */
   item(...args) {
     deprecate({
       type: 'method',
       name: 'item',
       version: '1.0.0',
-      alternative: 'addItem',
+      alternative: 'addItem'
     });
     return this.addItem(...args);
   }
 
   /**
- * @deprecated Since version 1.0.0
- */
+   * @deprecated Since version 1.0.0
+   */
   xml(...args) {
     deprecate({
       type: 'method',
       name: 'xml',
       version: '1.0.0',
-      alternative: 'buildXml',
+      alternative: 'buildXml'
     });
     return this.buildXml(...args);
   }

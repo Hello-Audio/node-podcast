@@ -9,9 +9,11 @@
   "scripts": {
     "prepare": "npm run build",
     "lint": "eslint src test",
+    "format": "prettier --write \"src/**/*.js\" \"test/**/*.mjs\"",
+    "format:check": "prettier --check \"src/**/*.js\" \"test/**/*.mjs\"",
     "build": "npm run clean && node esbuild.config.mjs",
     "clean": "rm -rf dist",
-    "test": "npm run lint && npm run build && ava"
+    "test": "npm run format:check && npm run lint && npm run build && mocha --bail \"test/**/*.mjs\""
   },
   "files": [
     "dist/*"
@@ -32,20 +34,18 @@
     "type": "git",
     "url": "http://github.com/Hello-Audio/node-podcast"
   },
-  "ava": {
-    "concurrency": 5,
-    "failFast": true
-  },
   "dependencies": {
     "rss": "^1.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
-    "ava": "^6.4.1",
+    "chai": "^6.2.2",
     "esbuild": "0.28.1",
     "eslint": "^9.39.0",
     "globals": "^17.11.0",
     "include-folder": "^1.0.0",
-    "mockdate": "^2.0.5"
+    "mocha": "^11.8.0",
+    "mockdate": "^2.0.5",
+    "prettier": "^3.9.6"
   }
 }

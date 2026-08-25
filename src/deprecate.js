@@ -1,11 +1,6 @@
 const warnedPositions = {};
 
-function deprecate({
-  type,
-  name,
-  version,
-  alternative,
-}) {
+function deprecate({ type, name, version, alternative }) {
   const stack = new Error().stack || '';
   let at = (stack.match(/(?:\s+at\s.+){2}\s+at\s(.+)/) || [undefined, ''])[1];
 
@@ -35,7 +30,8 @@ function deprecate({
     case 'function':
       message = 'Function';
       break;
-    default: message = type || '';
+    default:
+      message = type || '';
   }
   message += ` \`${name}\` has been deprecated`;
   if (version) {

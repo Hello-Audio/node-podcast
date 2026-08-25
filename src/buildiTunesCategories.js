@@ -3,9 +3,7 @@ function buildiTunesCategories(categories) {
   if (Array.isArray(categories)) {
     categories.forEach((category) => {
       if (category.subcats) {
-        const elements = [
-          { _attr: { text: category.text } },
-        ];
+        const elements = [{ _attr: { text: category.text } }];
         const cats = buildiTunesCategories(category.subcats);
         cats.forEach((cat) => {
           elements.push(cat);
