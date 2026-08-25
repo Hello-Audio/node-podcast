@@ -1,9 +1,13 @@
 import test from 'ava';
 import includeFolder from 'include-folder';
 import mockdate from 'mockdate';
-import Podcast from '..';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 
-const expectedOutput = includeFolder(`${__dirname}/expectedOutput`, /.*\.xml$/);
+const require = createRequire(import.meta.url);
+const Podcast = require('..');
+
+const expectedOutput = includeFolder(fileURLToPath(new URL('./expectedOutput', import.meta.url)), /.*\.xml$/);
 
 // Dates in XML files will always be this value.
 mockdate.set('Wed, 10 Dec 2014 19:04:57 GMT');

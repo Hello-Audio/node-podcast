@@ -13,4 +13,4 @@ function toDurationString(seconds) {
   return `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
 }
 
-export default toDurationString;
+module.exports = toDurationString;

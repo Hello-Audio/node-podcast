@@ -1,9 +1,9 @@
-import RSS from 'rss';
-import deprecate from './deprecate';
-import buildiTunesCategories from './buildiTunesCategories';
-import durationFormat from './durationFormat';
+const RSS = require('rss');
+const deprecate = require('./deprecate');
+const buildiTunesCategories = require('./buildiTunesCategories');
+const durationFormat = require('./durationFormat');
 
-export default class Podcast {
+class Podcast {
   constructor(options, items) {
     this.init(options, items);
   }

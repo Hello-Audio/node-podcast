@@ -49,7 +49,7 @@ function deprecate({
     message += `\n    at ${at}`;
   }
 
-  console.warn(message); // eslint-disable-line no-console
+  console.warn(message);
 }
 
-export default deprecate;
+module.exports = deprecate;

@@ -19,4 +19,4 @@ function buildiTunesCategories(categories) {
   return arr;
 }
 
-export default buildiTunesCategories;
+module.exports = buildiTunesCategories;
