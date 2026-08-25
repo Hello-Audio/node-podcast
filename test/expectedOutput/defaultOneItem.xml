@@ -9,11 +9,11 @@
       <itunes:name></itunes:name>
       <itunes:email></itunes:email>
     </itunes:owner>
-    <itunes:explicit>No</itunes:explicit>
+    <itunes:explicit>false</itunes:explicit>
     <item>
       <title><![CDATA[No title]]></title>
       <guid isPermaLink="false">No title</guid>
-      <itunes:explicit>No</itunes:explicit>
+      <itunes:explicit>false</itunes:explicit>
     </item>
   </channel>
 </rss>

@@ -112,6 +112,10 @@ var RSS = require("rss");
 var deprecate = require_deprecate();
 var buildiTunesCategories = require_buildiTunesCategories();
 var durationFormat = require_durationFormat();
+function formatItunesExplicit(value) {
+  if (typeof value === "boolean") return !!value;
+  return ["yes", "no", "clean"].includes(value) ? value || false : false;
+}
 var Podcast = class {
   constructor(options, items) {
     this.init(options, items);
@@ -163,7 +167,7 @@ var Podcast = class {
       ]
     });
     this.feedOptions.custom_elements.push({
-      "itunes:explicit": options.itunesExplicit || false ? "Yes" : "No"
+      "itunes:explicit": formatItunesExplicit(options.itunesExplicit)
     });
     if (options.itunesCategory) {
       const categories = buildiTunesCategories(options.itunesCategory);
@@ -216,7 +220,7 @@ var Podcast = class {
         "itunes:summary": itemOptions.itunesSummary || itemOptions.description
       });
     item.custom_elements.push({
-      "itunes:explicit": itemOptions.itunesExplicit || false ? "Yes" : "No"
+      "itunes:explicit": formatItunesExplicit(itemOptions.itunesExplicit)
     });
     if (itemOptions.itunesDuration)
       item.custom_elements.push({ "itunes:duration": durationFormat(itemOptions.itunesDuration) });

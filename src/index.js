@@ -3,6 +3,11 @@ const deprecate = require('./deprecate');
 const buildiTunesCategories = require('./buildiTunesCategories');
 const durationFormat = require('./durationFormat');
 
+function formatItunesExplicit(value) {
+  if (typeof value === 'boolean') return !!value;
+  return ['yes', 'no', 'clean'].includes(value) ? value || false : false;
+}
+
 class Podcast {
   constructor(options, items) {
     this.init(options, items);
@@ -62,7 +67,7 @@ class Podcast {
     });
 
     this.feedOptions.custom_elements.push({
-      'itunes:explicit': options.itunesExplicit || false ? 'Yes' : 'No'
+      'itunes:explicit': formatItunesExplicit(options.itunesExplicit)
     });
 
     if (options.itunesCategory) {
@@ -122,7 +127,7 @@ class Podcast {
         'itunes:summary': itemOptions.itunesSummary || itemOptions.description
       });
     item.custom_elements.push({
-      'itunes:explicit': itemOptions.itunesExplicit || false ? 'Yes' : 'No'
+      'itunes:explicit': formatItunesExplicit(itemOptions.itunesExplicit)
     });
     if (itemOptions.itunesDuration)
       item.custom_elements.push({ 'itunes:duration': durationFormat(itemOptions.itunesDuration) });

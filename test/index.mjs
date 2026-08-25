@@ -29,6 +29,27 @@ it('empty feed', () => {
   assert.strictEqual(feed.buildXml({ indent: '  ' }), expectedOutput.defaultOneItem.trim());
 });
 
+it('formats iTunes explicit values', () => {
+  for (const [value, expected] of [
+    [true, 'true'],
+    [false, 'false'],
+    ['yes', 'yes'],
+    ['no', 'no'],
+    ['clean', 'clean'],
+    ['invalid', 'false'],
+    [1, 'false']
+  ]) {
+    const feed = new Podcast({ itunesExplicit: value });
+    feed.addItem({ itunesExplicit: value });
+    const xml = feed.buildXml();
+
+    assert.strictEqual(
+      (xml.match(new RegExp(`<itunes:explicit>${expected}</itunes:explicit>`, 'g')) || []).length,
+      2
+    );
+  }
+});
+
 it('podcast', () => {
   const feed = new Podcast({
     title: 'title',

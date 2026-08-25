@@ -9,6 +9,6 @@
       <itunes:name></itunes:name>
       <itunes:email></itunes:email>
     </itunes:owner>
-    <itunes:explicit>No</itunes:explicit>
+    <itunes:explicit>false</itunes:explicit>
   </channel>
 </rss>
